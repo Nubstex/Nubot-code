@@ -262,6 +262,9 @@ class Config:
             )
 
         else:
+            key = 'TOKEN'
+            value12 = os.getenv('TOKEN')
+            print("Value of 'TOKEN' environment variable :", value12) 
             self.auth = (self._login_token,)
 
         if self.owner_id:
