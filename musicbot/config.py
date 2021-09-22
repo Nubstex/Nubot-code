@@ -42,7 +42,7 @@ class Config:
         print("Value of 'TOKEN' environment variable :", value12) 
 
         
-        self._login_token = os.environ['TOKEN']
+        self._login_token = os.getenv('TOKEN')
 
         self.auth = ()
 
