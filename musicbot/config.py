@@ -36,11 +36,6 @@ class Config:
         self._confpreface = "An error has occured reading the config:\n"
         self._confpreface2 = "An error has occured validating the config:\n"
 
-        key = 'TOKEN'
-        value12 = os.getenv('TOKEN')
-        print("Value of 'TOKEN' environment variable :", value12) 
-
-        
         self._login_token = os.getenv('TOKEN')
 
         self.auth = ()
@@ -261,9 +256,6 @@ class Config:
             )
 
         else:
-            key = 'TOKEN'
-            value12 = os.getenv('TOKEN')
-            print("Value of 'TOKEN' environment variable :", value12) 
             self.auth = (self._login_token,)
 
         if self.owner_id:
