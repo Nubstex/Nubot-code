@@ -14,12 +14,11 @@ log = logging.getLogger(__name__)
 class Config:
     # noinspection PyUnresolvedReferences
     def __init__(self, config_file):
-        config_path = "~/Nubot-code/config/options.ini"
         self.config_file = config_file
         self.find_config()
 
         config = configparser.ConfigParser(interpolation=None)
-        config.read("~/Nubot-code/config/options.ini", encoding='utf-8')
+        config.read(config_file, encoding="utf-8")
 
         confsections = {"Credentials", "Permissions", "Chat", "MusicBot"}.difference(
             config.sections()
@@ -37,7 +36,7 @@ class Config:
         self._confpreface = "An error has occured reading the config:\n"
         self._confpreface2 = "An error has occured validating the config:\n"
 
-        self._login_token = os.getenv('TOKEN')
+        self._login_token = os.getenv('token')
 
         self.auth = ()
 

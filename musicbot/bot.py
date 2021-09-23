@@ -72,13 +72,13 @@ class MusicBot(discord.Client):
         print()
 
         if config_file is None:
-            config_file = "~/Nubot-code/config/options.ini"
+            config_file = ConfigDefaults.options_file
 
         if perms_file is None:
-            perms_file = "~/Nubot-code/config/permissions.ini"
+            perms_file = PermissionsDefaults.perms_file
 
         if aliases_file is None:
-            aliases_file = "~/Nubot-code/config/aliases.json"
+            aliases_file = AliasesDefault.aliases_file
 
         self.players = {}
         self.exit_signal = None
@@ -86,7 +86,7 @@ class MusicBot(discord.Client):
         self.cached_app_info = None
         self.last_status = None
 
-        self.config = Config("~/Nubot-code/config/options.ini")
+        self.config = Config(config_file)
 
         self._setup_logging()
 
