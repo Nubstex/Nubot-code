@@ -14,6 +14,7 @@ log = logging.getLogger(__name__)
 class Config:
     # noinspection PyUnresolvedReferences
     def __init__(self, config_file):
+        config_path = "./config/options.ini"
         self.config_file = config_file
         self.find_config()
 
