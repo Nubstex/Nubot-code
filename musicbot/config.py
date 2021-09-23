@@ -14,12 +14,12 @@ log = logging.getLogger(__name__)
 class Config:
     # noinspection PyUnresolvedReferences
     def __init__(self, config_file):
-        config_path = "~/Nubot-code/config"
+        config_path = "~/Nubot-code/config/options.ini"
         self.config_file = config_file
         self.find_config()
 
         config = configparser.ConfigParser(interpolation=None)
-        config.read("~/Nubot-code/config", encoding='utf-8')
+        config.read("~/Nubot-code/config/options.ini", encoding='utf-8')
 
         confsections = {"Credentials", "Permissions", "Chat", "MusicBot"}.difference(
             config.sections()
