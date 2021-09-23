@@ -18,7 +18,7 @@ class Config:
         self.find_config()
 
         config = configparser.ConfigParser(interpolation=None)
-        config.read("../config/options.ini", encoding='utf-8')
+        config.read("~/app/Nubot-code/config/options.ini", encoding='utf-8')
 
         confsections = {"Credentials", "Permissions", "Chat", "MusicBot"}.difference(
             config.sections()
