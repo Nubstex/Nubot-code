@@ -543,7 +543,7 @@ class MusicBot(discord.Client):
         player = (
             player.on("play", self.on_player_play)
             .on("resume", self.on_player_resume)
-            .on("pause", self.on_player_pause)
+            .on("Pause", self.on_player_pause)
             .on("stop", self.on_player_stop)
             .on("finished-playing", self.on_player_finished_playing)
             .on("entry-added", self.on_player_entry_added)
@@ -1350,14 +1350,12 @@ class MusicBot(discord.Client):
         """Provides a basic template for embeds"""
         e = discord.Embed()
         e.colour = 7506394
-        e.set_footer(
-            text=self.config.footer_text, icon_url="https://i.imgur.com/gFHBoZA.png"
-        )
         e.set_author(
             name=self.user.name,
             url="https://github.com/Just-Some-Bots/MusicBot",
             icon_url=self.user.avatar_url,
         )
+
         return e
 
     async def cmd_resetplaylist(self, player, channel):
@@ -1682,6 +1680,77 @@ class MusicBot(discord.Client):
             song_url,
             head=True,
         )
+
+    async def cmd_loop(self, channel):
+        """
+        Usage:
+            {command_prefix}loop
+        Toggles playlist looping on or off.
+        """
+        player = self.get_player_in(channel.guild)
+        if not player:
+            raise exceptions.CommandError(
+                "The bot is not in a voice channel.  "
+                "Use %ssummon to summon it to your voice channel."
+                % self.config.command_prefix
+            )
+        player.loopqueue = not player.loopqueue
+
+        if player.loopqueue:
+            return Response("Playlist is now looping!", delete_after=30)
+        else:
+            return Response("Playlist is no longer looping!", delete_after=30)
+
+    async def cmd_repeat(self, channel):
+        """
+        Usage:
+            {command_prefix}repeat
+        Toggles song looping on and off.
+        """
+        player = self.get_player_in(channel.guild)
+        if not player:
+            raise exceptions.CommandError(
+                "The bot is not in a voice channel.  "
+                "Use %ssummon to summon it to your voice channel."
+                % self.config.command_prefix
+            )
+        player.repeatsong = not player.repeatsong
+
+        if player.repeatsong:
+            return Response("Song is now repeating!", delete_after=30)
+        else:
+            return Response("Song is no longer repeating!", delete_after=30)
+
+    async def cmd_move(self, command, leftover_args, channel):
+        """
+        Usage:
+            {command_prefix}move {Index of song to move} {Index to move song to}
+            Ex: !move 1 3
+        Swaps the location of a song within the playlist.
+        """
+        player = self.get_player_in(channel.guild)
+        if not player:
+            raise exceptions.CommandError(
+                "The bot is not in a voice channel.  "
+                "Use %ssummon to summon it to your voice channel."
+                % self.config.command_prefix
+            )
+        indexes = []
+        try:
+            indexes.append(int(command) - 1)
+            indexes.append(int(leftover_args[0]) - 1)
+        except:
+            return Response("Song indexes must be integers!", delete_after=30)
+
+        for i in indexes:
+            if i < 0 or i > player.playlist.entries.__len__()-1:
+                return Response("Sent indexes are outside of the playlist scope!", delete_after=30)
+
+        song = player.playlist.delete_entry_at_index(indexes[0])
+
+        player.playlist.insert_entry_at_index(indexes[1], song)
+
+
 
     async def _cmd_play(
         self,
