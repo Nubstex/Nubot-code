@@ -3,5 +3,6 @@
     "skip": ["s", "fs","next"],
     "queue": ["q","view","list","l"],
     "summon": ["join"],
+    "volume": ["vol","v"],
     "resume": ["start"]
 }
