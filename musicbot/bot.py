@@ -72,13 +72,13 @@ class MusicBot(discord.Client):
         print()
 
         if config_file is None:
-            config_file = "./config/options.ini"
+            config_file = "../config/options.ini"
 
         if perms_file is None:
-            perms_file = "./config/permissions.ini"
+            perms_file = "../config/permissions.ini"
 
         if aliases_file is None:
-            aliases_file = "./config/aliases.json"
+            aliases_file = "../config/aliases.json"
 
         self.players = {}
         self.exit_signal = None
