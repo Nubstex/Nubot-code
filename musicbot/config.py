@@ -40,13 +40,9 @@ class Config:
 
         self.auth = ()
 
-        self.spotify_clientid = config.get(
-            "Credentials", "Spotify_ClientID", fallback=ConfigDefaults.spotify_clientid
+        self.spotify_clientid = os.getenv('CLIENTID')
         )
-        self.spotify_clientsecret = config.get(
-            "Credentials",
-            "Spotify_ClientSecret",
-            fallback=ConfigDefaults.spotify_clientsecret,
+        self.spotify_clientsecret = os.getenv('CLIENTSECRET')
         )
 
         self.owner_id = config.get(
