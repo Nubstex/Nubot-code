@@ -41,9 +41,9 @@ class Config:
         self.auth = ()
 
         self.spotify_clientid = os.getenv('CLIENTID')
-        )
+        
         self.spotify_clientsecret = os.getenv('CLIENTSECRET')
-        )
+        
 
         self.owner_id = config.get(
             "Permissions", "OwnerID", fallback=ConfigDefaults.owner_id
